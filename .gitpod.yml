@@ -2,7 +2,7 @@ tasks:
   - init: curl https://sh.rustup.rs -sSf | sh
     init: 1
     init: source /workspace/.cargo/env
-  - init: rustup install nightly
+    init: rustup install nightly
     init: rustup install stable
     init: rustup target add wasm32-unknown-unknown --toolchain nightly
     command: make init
