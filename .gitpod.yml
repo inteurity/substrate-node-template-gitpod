@@ -1,9 +1,23 @@
+image:
+  file: .gitpod.Dockerfile
+
+# List the ports you want to expose and what to do when they are served. See https://www.gitpod.io/docs/config-ports/
+ports:
+  - port: 8000
+    onOpen: open-preview
+
+# List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - init: curl https://sh.rustup.rs -sSf | sh
-    init: 1
-    init: source /workspace/.cargo/env
-    init: rustup install nightly
-    init: rustup install stable
-    init: rustup target add wasm32-unknown-unknown --toolchain nightly
-    command: make init
-    command: make build
+  - init: |
+      curl https://sh.rustup.rs -sSf | sh -s -- -y
+      source /workspace/.cargo/env
+      rustup install nightly
+      rustup install stable
+      rustup target add wasm32-unknown-unknown --toolchain nightly
+      make init
+    command: |
+      make init
+      make build
+    prebuild: |
+      make init
+      make build
